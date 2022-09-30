@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import axios from 'axios';
+import Header from './components/Header';
 
 function App() {
+  const [allCards, setAllCards] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    async function getAllCards() {
+      const { data } = await axios.get(
+        'https://db.ygoprodeck.com/api/v7/cardinfo.php',
+      );
+      setAllCards(data.data);
+      // console.log(data.data[0]);
+      setLoading(false);
+    }
+    getAllCards();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <main className="container">
+        {loading ? (
+          <h1>Carregando</h1>
+        ) : (
+          <>
+            <section>
+              {allCards.map((card) => (
+                <div>
+                  <h2>{card.name}</h2>
+                </div>
+              ))}
+            </section>
+          </>
+        )}
+      </main>
+    </>
   );
 }
 
