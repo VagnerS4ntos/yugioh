@@ -9,22 +9,22 @@
   color: white;
 }
 
-.paginationBtn {
-  width: 80%;
+.paginationContainer {
   height: 40px;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   margin: 2rem 0;
 }
 
-.paginationBtn a {
+.paginationContainer a {
   padding: 3px 5px;
   margin: 8px;
   border-radius: 5px;
   border: 1px solid;
 }
 
-.paginationBtn a:hover {
+.paginationContainer a:hover {
   background-color: white;
   color: black;
 }
