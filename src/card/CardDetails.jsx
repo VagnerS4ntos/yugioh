@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function CardDetails() {
   const { allCards } = useSelector((state) => state.cards);
@@ -10,7 +11,13 @@ function CardDetails() {
   );
 
   return (
-    <main className="container mt-10">
+    <main className="container mt-10 pb-5">
+      <Link
+        to="/"
+        className="bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded-md mb-5 inline-block"
+      >
+        Home page
+      </Link>
       {filterCard.map((card) => (
         <section className="flex flex-col sm:flex-row gap-5">
           <img
