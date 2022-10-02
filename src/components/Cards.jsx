@@ -46,16 +46,25 @@ function Cards() {
             ) : (
               <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-y-10 justify-items-center">
                 {cardsOnScreen.map((card) => (
-                  <div className="w-fit cursor-pointer" key={card.id}>
-                    <Link to={`/card/${card.id}`}>
-                      <img
-                        src="/card.jpg"
-                        alt={card.name}
-                        className="w-36"
-                        onLoad={({ target }) =>
-                          (target.src = card.card_images[0].image_url)
-                        }
-                      />
+                  <div
+                    className="w-fit cursor-pointer relative group"
+                    key={card.id}
+                  >
+                    <img
+                      src="/card.jpg"
+                      alt={card.name}
+                      className="w-36"
+                      onLoad={({ target }) =>
+                        (target.src = card.card_images[0].image_url)
+                      }
+                    />
+                    <Link
+                      to={`/card/${card.id}`}
+                      className="absolute w-full h-full bg-black/80 z-10 top-0  hidden group-hover:grid place-items-center"
+                    >
+                      <button className="bg-green-500 px-2 py-1 rounded-md">
+                        Details
+                      </button>
                     </Link>
                   </div>
                 ))}
