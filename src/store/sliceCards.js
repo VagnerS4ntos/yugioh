@@ -6,7 +6,9 @@ export const slice = createSlice({
   initialState: {
     loading: false,
     allCards: [],
+    filteredCards: [],
     error: null,
+    pageActiveNumber: 0,
   },
   reducers: {
     fetchStarted(state) {
@@ -22,10 +24,22 @@ export const slice = createSlice({
       state.allCards = [];
       state.error = action.payload;
     },
+    fiterCards(state, action) {
+      state.filteredCards = action.payload;
+    },
+    changePageActive(state, action) {
+      state.pageActiveNumber = action.payload;
+    },
   },
 });
 
-export const { fetchStarted, fetchSuccess, fetchError } = slice.actions;
+export const {
+  fetchStarted,
+  fetchSuccess,
+  fetchError,
+  fiterCards,
+  changePageActive,
+} = slice.actions;
 
 export const fetchCards = () => async (dispatch) => {
   try {
@@ -33,7 +47,7 @@ export const fetchCards = () => async (dispatch) => {
     const { data } = await axios.get(
       'https://db.ygoprodeck.com/api/v7/cardinfo.php',
     );
-
+    dispatch(fiterCards(data.data));
     return dispatch(fetchSuccess(data.data));
   } catch (error) {
     return dispatch(fetchError(error.message));

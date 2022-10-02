@@ -5,6 +5,7 @@ import { fetchCards } from './../store/sliceCards';
 
 function Header() {
   const dispatch = useDispatch();
+
   React.useEffect(() => {
     dispatch(fetchCards());
   }, []);

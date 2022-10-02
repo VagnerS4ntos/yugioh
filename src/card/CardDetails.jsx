@@ -8,7 +8,6 @@ function CardDetails() {
   const filterCard = allCards.filter(
     (card) => card.id.toString() === id.toString(),
   );
-  console.log(filterCard);
 
   return (
     <main className="container mt-10">
